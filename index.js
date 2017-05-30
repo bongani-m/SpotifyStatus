@@ -49,7 +49,7 @@ refresh.use(stategySlack);
 var strategySpotify = new SpotifyStrategy({
     clientID: CLIENT_ID_SPOTIFY,
     clientSecret: CLIENT_SECRET_SPOTIFY,
-    callbackURL: "http://localhost:3000/auth/spotify/callback"
+    callbackURL: "https://spotifystatus.herokuapp.com/auth/spotify/callback"
   },
   function(accessToken, refreshToken, profile, done) {
    var spotify = {
@@ -118,7 +118,7 @@ function scheduleRefresh(user) {
         db.put(user.doc);
       });
       var j = schedule.scheduleJob(rule, function(){
-        request.post({url:'http://localhost:3001/update', json: user.doc});
+        request.post({url:'https://spotifystatus.herokuapp.com:3001/update', json: user.doc});
       });
 }
 
