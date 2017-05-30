@@ -16,7 +16,7 @@ const {CLIENT_ID_SLACK, CLIENT_SECRET_SLACK,CLIENT_ID_SPOTIFY, CLIENT_SECRET_SPO
       app = express();
 
 // Set Up
-app.use(express.static(__dirname + 'client/build'));
+app.use(express.static(__dirname + '/client/build'));
 app.use('/db', require('express-pouchdb')(PouchDB));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -90,7 +90,7 @@ app.get('/auth/slack/callback',
 });
 
 app.get('/', (req, res)=>{
-   res.sendfile(__dirname + 'client/build/index.html');
+   res.sendfile(__dirname + '/client/build/index.html');
 });
 
 
