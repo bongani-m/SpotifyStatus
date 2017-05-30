@@ -89,6 +89,11 @@ app.get('/auth/slack/callback',
     res.redirect("/");
 });
 
+app.get('/', (req, res)=>{
+   res.sendfile(__dirname + 'client/build/index.html');
+});
+
+
 app.get("/start", (req, res) => {
   sess = req.session;
     var user = sess.user;
