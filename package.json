@@ -1,0 +1,31 @@
+{
+  "name": "SpotifyStatus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js && js job.js",
+    "job": "node job.js",
+    "app": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
+    "express-pouchdb": "^2.3.7",
+    "express-session": "^1.15.3",
+    "leo-profanity": "^1.2.2",
+    "node-schedule": "^1.2.3",
+    "passport": "^0.3.2",
+    "passport-oauth2-refresh": "^1.0.0",
+    "passport-slack": "0.0.7",
+    "passport-spotify": "^0.3.1",
+    "pouchdb": "^6.2.0",
+    "request": "^2.81.0"
+  }
+}
