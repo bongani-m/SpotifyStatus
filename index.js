@@ -123,7 +123,7 @@ function scheduleRefresh(user) {
         db.put(user.doc);
       });
       var j = schedule.scheduleJob(rule, function(){
-        request.post({url:'https://spotifystatus.herokuapp.com:3001/update', json: user.doc});
+        request.post({url:'https://spotifystatus.herokuapp.com/update', json: user.doc});
       });
 }
 
@@ -169,6 +169,43 @@ function scheduleRefresh(user) {
           }
       }
       request(options, callback);
+    
+  })
+
+  
+
+  app.post('/update', (req, res) => {
+      
+      var user = req.body;
+      var headers = {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + user.spotify.accessToken
+      };
+
+      var options = {
+          url: 'https://api.spotify.com/v1/me/player',
+          headers: headers
+      };
+
+      function callback(error, response, body) {
+          if(error){
+              console.log(error);
+          }
+          if (!error && response.statusCode == 200) {
+              var data = JSON.parse(body);
+              var status_text = "I'm playing '" + filter.clean(data.item.name) + "' by " + data.item.artists[0].name;    
+              var status = {
+                  "status_text": status_text,
+                  "status_emoji": ":spotify:"
+              };
+          
+              var uriEncoded = encodeURIComponent(JSON.stringify(status));
+              var url = `https://slack.com/api/users.profile.set?token=` + user.slack.accessToken + `&profile=` + uriEncoded;
+              request.post(url,(err, code, body) => {console.log(err)});
+          }
+      }
+      request(options, callback);
+      res.json({code: 200,res: "OK"});
     
   })
 

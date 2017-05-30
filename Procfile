@@ -1,1 +1,1 @@
-web: node index.js && node job.js
+web: node index.js
