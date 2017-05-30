@@ -16,7 +16,7 @@ const {CLIENT_ID_SLACK, CLIENT_SECRET_SLACK,CLIENT_ID_SPOTIFY, CLIENT_SECRET_SPO
       app = express();
 
 // Set Up
-app.use(express.static('client/build'));
+app.use(express.static(__dirname + 'client/build'));
 app.use('/db', require('express-pouchdb')(PouchDB));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
