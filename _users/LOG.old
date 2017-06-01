@@ -1,5 +1,5 @@
-2017/06/01-03:03:56.765 8ec Recovering log #35
-2017/06/01-03:03:56.765 8ec Level-0 table #37: started
-2017/06/01-03:03:56.771 8ec Level-0 table #37: 287 bytes OK
-2017/06/01-03:03:56.790 8ec Delete type=0 #35
-2017/06/01-03:03:56.791 8ec Delete type=3 #33
+2017/06/01-04:50:28.065 4260 Recovering log #58
+2017/06/01-04:50:28.066 4260 Level-0 table #60: started
+2017/06/01-04:50:28.074 4260 Level-0 table #60: 287 bytes OK
+2017/06/01-04:50:28.091 4260 Delete type=0 #58
+2017/06/01-04:50:28.092 4260 Delete type=3 #56

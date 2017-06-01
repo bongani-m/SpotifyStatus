@@ -158,9 +158,10 @@ function scheduleRefresh(user) {
 
 
 app.get('/topartists', (req,res) => {
-  db.get('6A277D36-9CFD-47EF-B9D9-D35FE0B2B1D7')
-    .then((user)=>{
-      console.log(user);
+ db.find({
+  selector: {name: 'Bongani Mbigi'}
+}).then((data)=>{
+      var user = data.docs[0];
       var options = {
         method: 'GET',
         url: 'https://api.spotify.com/v1/me/top/artists?limit=50',
@@ -177,9 +178,10 @@ app.get('/topartists', (req,res) => {
 });
 
 app.get('/toptracks', (req,res) => {
-  db.get('6A277D36-9CFD-47EF-B9D9-D35FE0B2B1D7')
-    .then((user)=>{
-      console.log(user);
+   db.find({
+  selector: {name: 'Bongani Mbigi'}
+}).then((data)=>{
+      var user = data.docs[0];
       var options = {
         method: 'GET',
         url: 'https://api.spotify.com/v1/me/top/tracks?limit=50',
