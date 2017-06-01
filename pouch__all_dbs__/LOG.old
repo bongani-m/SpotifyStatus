@@ -1,5 +1,5 @@
-2017/06/01-04:51:53.126 17fc Recovering log #61
-2017/06/01-04:51:53.126 17fc Level-0 table #63: started
-2017/06/01-04:51:53.165 17fc Level-0 table #63: 237 bytes OK
-2017/06/01-04:51:53.185 17fc Delete type=0 #61
-2017/06/01-04:51:53.186 17fc Delete type=3 #59
+2017/06/01-05:09:41.534 40dc Recovering log #67
+2017/06/01-05:09:41.534 40dc Level-0 table #70: started
+2017/06/01-05:09:41.537 40dc Level-0 table #70: 237 bytes OK
+2017/06/01-05:09:41.551 40dc Delete type=0 #67
+2017/06/01-05:09:41.552 40dc Delete type=3 #65

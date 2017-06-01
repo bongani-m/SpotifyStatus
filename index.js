@@ -29,7 +29,6 @@ if(PROD == "FALSE") {
   callbacks = {
       spotify : "http://localhost:3000/auth/spotify/callback",
       slack: "http://localhost:3000/auth/slack/callback"
-    
   }
 } else {
   callbacks = {
