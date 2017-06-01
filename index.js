@@ -1,6 +1,6 @@
 // loads env values
 require('dotenv').config();
-const {CLIENT_ID_SLACK, CLIENT_SECRET_SLACK,CLIENT_ID_SPOTIFY, CLIENT_SECRET_SPOTIFY, PORT} = process.env,
+const {CLIENT_ID_SLACK, CLIENT_SECRET_SLACK,CLIENT_ID_SPOTIFY, CLIENT_SECRET_SPOTIFY, PORT, PROD} = process.env,
       SlackStrategy = require('passport-slack').Strategy,
       SpotifyStrategy = require('passport-spotify').Strategy,
       passport = require('passport'),
@@ -23,13 +23,30 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(session({secret: 'ssshhhhh'}));
 
+var callbacks = {};
+
+if(PROD == "FALSE") {
+  callbacks = {
+      spotify : "http://localhost:3000/auth/spotify/callback",
+      slack: "http://localhost:3000/auth/slack/callback"
+    
+  }
+} else {
+  callbacks = {
+      spotify : "https://spotifystatus.herokuapp.com/auth/spotify/callback",
+      slack: "https://spotifystatus.herokuapp.com/auth/slack/callback"
+  }
+}
+
 var db = new PouchDB('spotifystatus');
 var sess;
 // Auth Set Up
 var stategySlack = new SlackStrategy({
     clientID: CLIENT_ID_SLACK,
     clientSecret: CLIENT_SECRET_SLACK,
-    scope: [ 'users.profile:write']
+    profileUrl: 'https://slack.com/api/users.identity?token=',
+    scope: [ 'users.profile:write'],
+    callbackURL: callbacks.slack
   }, (accessToken, refreshToken, profile, done) => {
     var slack = {
             name: profile.user.name, 
@@ -49,7 +66,7 @@ refresh.use(stategySlack);
 var strategySpotify = new SpotifyStrategy({
     clientID: CLIENT_ID_SPOTIFY,
     clientSecret: CLIENT_SECRET_SPOTIFY,
-    callbackURL: "https://spotifystatus.herokuapp.com/auth/spotify/callback"
+    callbackURL: callbacks.spotify,
   },
   function(accessToken, refreshToken, profile, done) {
    var spotify = {
@@ -77,7 +94,7 @@ app.use(passport.initialize());
 
 // path to start the OAuth flow
 app.get('/auth/slack', passport.authorize('slack'));
-app.get('/auth/spotify', passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private','user-read-playback-state'],
+app.get('/auth/spotify', passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private','user-read-playback-state', 'user-top-read'],
   session: false }));
 
 // OAuth callback url
@@ -140,39 +157,43 @@ function scheduleRefresh(user) {
   });
 
 
-
-  app.post('/update', (req, res) => {
-    
-      var user = req.body;
-      var headers = {
-          'Accept': 'application/json',
-          'Authorization': 'Bearer ' + user.spotify.accessTokenSpotify
-      };
-
+app.get('/topartists', (req,res) => {
+  db.get('6A277D36-9CFD-47EF-B9D9-D35FE0B2B1D7')
+    .then((user)=>{
+      console.log(user);
       var options = {
-          url: 'https://api.spotify.com/v1/me/player',
-          headers: headers
+        method: 'GET',
+        url: 'https://api.spotify.com/v1/me/top/artists?limit=50',
+        headers: {
+          'Authorization': 'Bearer ' + user.spotify.accessToken
+        }
       };
 
-      function callback(error, response, body) {
-          if (!error && response.statusCode == 200) {
-              var data = JSON.parse(body);
-              var status_text = "I'm playing '" + filter.clean(data.item.name) + "' by " + data.item.artists[0].name;    
-              var status = {
-                  "status_text": status_text,
-                  "status_emoji": ":spotify:"
-              };
-          
-              var uriEncoded = encodeURIComponent(JSON.stringify(status));
-              var url = `https://slack.com/api/users.profile.set?token=` + user.slack.accessToken + `&profile=` + uriEncoded;
-              request.post(url,(err, code, body) => {console.log(err)});
-          }
-      }
-      request(options, callback);
-    
-  })
+        request(options,(err, response, body) => {
+          var result = JSON.parse(body);
+          res.json(result);
+        });
+    });
+});
 
-  
+app.get('/toptracks', (req,res) => {
+  db.get('6A277D36-9CFD-47EF-B9D9-D35FE0B2B1D7')
+    .then((user)=>{
+      console.log(user);
+      var options = {
+        method: 'GET',
+        url: 'https://api.spotify.com/v1/me/top/tracks?limit=50',
+        headers: {
+          'Authorization': 'Bearer ' + user.spotify.accessToken
+        }
+      };
+
+        request(options,(err, response, body) => {
+          var result = JSON.parse(body);
+          res.json(result);
+        });
+    });
+});
 
   app.post('/update', (req, res) => {
       

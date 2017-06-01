@@ -6,6 +6,10 @@ npm-debug.log
 *.env
 *.dev
 .DS_Store
+_replicator
+_users
+spotifystatus
+pouch_all_dbs_
 
 # Docker
 Dockerfile

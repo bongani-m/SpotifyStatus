@@ -1,5 +1,14 @@
-2017/05/30-05:38:12.259 4044 Recovering log #3
-2017/05/30-05:38:12.259 4044 Level-0 table #5: started
-2017/05/30-05:38:12.264 4044 Level-0 table #5: 792 bytes OK
-2017/05/30-05:38:12.277 4044 Delete type=0 #3
-2017/05/30-05:38:12.278 4044 Delete type=3 #2
+2017/06/01-03:28:18.103 20cc Recovering log #38
+2017/06/01-03:28:18.103 20cc Level-0 table #40: started
+2017/06/01-03:28:18.114 20cc Level-0 table #40: 237 bytes OK
+2017/06/01-03:28:18.130 20cc Delete type=0 #38
+2017/06/01-03:28:18.131 20cc Delete type=3 #36
+2017/06/01-03:28:18.132 42b0 Compacting 4@0 + 1@1 files
+2017/06/01-03:28:18.138 42b0 Generated table #42@0: 9 keys, 754 bytes
+2017/06/01-03:28:18.138 42b0 Compacted 4@0 + 1@1 files => 754 bytes
+2017/06/01-03:28:18.142 42b0 compacted to: files[ 0 1 0 0 0 0 0 ]
+2017/06/01-03:28:18.142 42b0 Delete type=2 #29
+2017/06/01-03:28:18.144 42b0 Delete type=2 #31
+2017/06/01-03:28:18.145 42b0 Delete type=2 #34
+2017/06/01-03:28:18.147 42b0 Delete type=2 #37
+2017/06/01-03:28:18.148 42b0 Delete type=2 #40
