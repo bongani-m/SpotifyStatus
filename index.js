@@ -169,12 +169,13 @@ app.get('/topartists', (req,res) => {
           'Authorization': 'Bearer ' + user.spotify.accessToken
         }
       };
-
         request(options,(err, response, body) => {
           var result = JSON.parse(body);
           res.json(result);
         });
     });
+}).catch((err)=>{
+  console.log(err);
 });
 
 app.get('/toptracks', (req,res) => {
@@ -195,6 +196,8 @@ app.get('/toptracks', (req,res) => {
           res.json(result);
         });
     });
+}).catch((err)=>{
+  console.log(err);
 });
 
   app.post('/update', (req, res) => {
