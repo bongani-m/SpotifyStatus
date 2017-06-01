@@ -173,10 +173,10 @@ app.get('/topartists', (req,res) => {
           var result = JSON.parse(body);
           res.json(result);
         });
-    });
-}).catch((err)=>{
+    }).catch((err)=>{
   console.log(err);
-});
+}); 
+})
 
 app.get('/toptracks', (req,res) => {
    db.find({
@@ -195,9 +195,9 @@ app.get('/toptracks', (req,res) => {
           var result = JSON.parse(body);
           res.json(result);
         });
-    });
-}).catch((err)=>{
+    }).catch((err)=>{
   console.log(err);
+});
 });
 
   app.post('/update', (req, res) => {
