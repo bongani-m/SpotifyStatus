@@ -15,17 +15,17 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "cors": "^2.8.3",
-    "dotenv": "^4.0.0",
+    "dotenv": "^6.0.0",
     "express": "^4.15.3",
-    "express-pouchdb": "^2.3.7",
+    "express-pouchdb": "^4.0.1",
     "express-session": "^1.15.3",
     "leo-profanity": "^1.2.2",
     "node-schedule": "^1.2.3",
-    "passport": "^0.3.2",
+    "passport": "^0.4.0",
     "passport-oauth2-refresh": "^1.0.0",
     "passport-slack": "0.0.7",
-    "passport-spotify": "^0.3.1",
-    "pouchdb": "^6.2.0",
+    "passport-spotify": "^1.0.1",
+    "pouchdb": "^7.0.0",
     "request": "^2.81.0"
   }
 }
